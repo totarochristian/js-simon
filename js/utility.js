@@ -12,9 +12,11 @@ function GetRandomInt(max,min) {
 
 /** Function that will start the game */
 function MainProgram(){
-    console.log("test");
+    let level = 1;
+    let numToShow = 5;
+    
     HideObjectById("start");
-    ShowObjectById("showNum");
+    StartShowNumbers(level,numToShow);
 }
 
 /** Function used to hide an object with a specific id */
@@ -24,4 +26,36 @@ function HideObjectById(id){
 /** Function used to hide an object with a specific id */
 function ShowObjectById(id){
     document.getElementById(id).classList.remove("d-none");
+}
+
+function StartShowNumbers(level,numToShow){
+    //Add level and last number index to the relative html elements
+    document.getElementById("level").innerText = level;
+    document.getElementById("lastNumberIndex").innerText = numToShow;
+    ShowObjectById("showNum");
+
+    let arr = DefineRandomNumbers(numToShow,level);
+
+    setTimeout(()=>{ShowSingleNum(1,arr,numToShow)},2000);
+}
+
+function DefineRandomNumbers(numOfElems,level){
+    let arr = [];
+    for(let i=0; i<numOfElems; i++)
+        arr[i] = GetRandomInt(level*10,1);
+    return arr;
+}
+
+function ShowSingleNum(index,arr,max){
+    document.getElementById("currentNumberIndex").innerText = index;
+    document.getElementById("number").innerText = arr[index-1];
+    ShowObjectById("number");
+    setTimeout(() => {
+         HideObjectById("number");
+         if(index+1<=max)
+            setTimeout(()=>{ShowSingleNum(index+1,arr,max)},1000);
+            else{
+                HideObjectById("showNum");
+            }
+            },3000);
 }
