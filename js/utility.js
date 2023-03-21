@@ -58,7 +58,7 @@ function ShowSingleNum(index,arr,max,level){
                 HideObjectById("showNum");
                 StartCheckNumbers(arr,max,level);
             }
-    },5000);
+    },(5500-(level*500)));
 }
 function StartCheckNumbers(arr,maxNum,level){
     for(let i=1; i<=maxNum; i++){
@@ -84,6 +84,7 @@ function StartCheckNumbers(arr,maxNum,level){
     const btn = document.createElement("button");
     btn.id="checkNumbers";
     btn.addEventListener("click",CheckUserNums);
+    btn.innerText = "Controlla";
     document.getElementById("checkNum").appendChild(btn);
 
     ShowObjectById("checkNum");
@@ -104,8 +105,12 @@ function CheckUserNums(){
     }
     document.getElementById("checkNum").innerHTML = '';
     HideObjectById("checkNum");
-    if(!wrong)
-        StartShowNumbers(level+1,maxNum+2);
+    if(!wrong && level+1<=10)
+        StartShowNumbers(level+1,maxNum+1);
+    else if(!wrong && level+1>10){
+        alert("Hai Vinto!");
+        ShowObjectById("start");
+    }
     else{
         alert("Hai perso");
         ShowObjectById("start");
