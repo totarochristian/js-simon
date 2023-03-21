@@ -9,3 +9,10 @@ function GetRandomInt(max,min) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+/**
+ * Function that will start the game
+ */
+function MainProgram(){
+    console.log("test");
+}

@@ -17,3 +17,5 @@ of the numbers to guess have been found.
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
+
+document.getElementById("startAll").addEventListener("click",MainProgram);
