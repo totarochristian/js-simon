@@ -19,14 +19,19 @@ button:hover{
     background-color: orange;
     cursor: pointer;
 }
-#start{
+.basic-form{
     background-color: brown;
     color: white;
     padding: 2rem;
     max-width: 500px;
+    min-width: 200px;
     border-radius: 20px;
     text-align: center;
 }
 .d-none{
     display: none;
+}
+#showNum>h2{
+    color: yellow;
+    font-size: 3rem;
 }

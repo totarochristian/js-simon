@@ -14,6 +14,7 @@ function GetRandomInt(max,min) {
 function MainProgram(){
     console.log("test");
     HideObjectById("start");
+    ShowObjectById("showNum");
 }
 
 /** Function used to hide an object with a specific id */
