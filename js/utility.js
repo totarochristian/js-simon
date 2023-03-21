@@ -10,9 +10,17 @@ function GetRandomInt(max,min) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-/**
- * Function that will start the game
- */
+/** Function that will start the game */
 function MainProgram(){
     console.log("test");
+    HideObjectById("start");
+}
+
+/** Function used to hide an object with a specific id */
+function HideObjectById(id){
+    document.getElementById(id).classList.add("d-none");
+}
+/** Function used to hide an object with a specific id */
+function ShowObjectById(id){
+    document.getElementById(id).classList.remove("d-none");
 }
