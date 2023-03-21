@@ -36,7 +36,7 @@ function StartShowNumbers(level,numToShow){
 
     let arr = DefineRandomNumbers(numToShow,level);
 
-    setTimeout(()=>{ShowSingleNum(1,arr,numToShow)},500);
+    setTimeout(()=>{ShowSingleNum(1,arr,numToShow,level)},500);
 }
 
 function DefineRandomNumbers(numOfElems,level){
@@ -46,16 +46,68 @@ function DefineRandomNumbers(numOfElems,level){
     return arr;
 }
 
-function ShowSingleNum(index,arr,max){
+function ShowSingleNum(index,arr,max,level){
     document.getElementById("currentNumberIndex").innerText = index;
     document.getElementById("number").innerText = arr[index-1];
     ShowObjectById("number");
     setTimeout(() => {
          HideObjectById("number");
          if(index+1<=max)
-            setTimeout(()=>{ShowSingleNum(index+1,arr,max)},500);
+            setTimeout(()=>{ShowSingleNum(index+1,arr,max,level)},500);
             else{
                 HideObjectById("showNum");
+                StartCheckNumbers(arr,max,level);
             }
     },5000);
+}
+function StartCheckNumbers(arr,maxNum,level){
+    for(let i=1; i<=maxNum; i++){
+        const inp = document.createElement("input");
+        inp.id = "inp_"+i;
+        inp.placeholder = "Inserisci il numero "+i;
+        inp.setAttribute("type","text");
+        inp.setAttribute("correctAnswer",arr[i-1]);
+        document.getElementById("checkNum").appendChild(inp);
+    }
+    const lev = document.createElement("input");
+    lev.id = "levelVal";
+    lev.setAttribute("type","hidden");
+    lev.value = level;
+    document.getElementById("checkNum").appendChild(lev);
+
+    const mn = document.createElement("input");
+    mn.id = "maxNumbers";
+    mn.setAttribute("type","hidden");
+    mn.value = maxNum;
+    document.getElementById("checkNum").appendChild(mn);
+
+    const btn = document.createElement("button");
+    btn.id="checkNumbers";
+    btn.addEventListener("click",CheckUserNums);
+    document.getElementById("checkNum").appendChild(btn);
+
+    ShowObjectById("checkNum");
+}
+
+function CheckUserNums(){
+    let level = parseInt(document.getElementById("levelVal").value);
+    let maxNum = parseInt(document.getElementById("maxNumbers").value);
+
+    let wrong = false;
+    for(let i=1; i<maxNum; i++){
+        let user = parseInt(document.getElementById("inp_"+i).value);
+        let real = parseInt(document.getElementById("inp_"+i).getAttribute("correctAnswer"));
+        if(user!=real){
+            wrong = true;
+            break;
+        }
+    }
+    document.getElementById("checkNum").innerHTML = '';
+    HideObjectById("checkNum");
+    if(!wrong)
+        StartShowNumbers(level+1,maxNum+2);
+    else{
+        alert("Hai perso");
+        ShowObjectById("start");
+    }
 }
