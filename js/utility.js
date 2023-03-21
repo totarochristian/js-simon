@@ -36,7 +36,7 @@ function StartShowNumbers(level,numToShow){
 
     let arr = DefineRandomNumbers(numToShow,level);
 
-    setTimeout(()=>{ShowSingleNum(1,arr,numToShow)},2000);
+    setTimeout(()=>{ShowSingleNum(1,arr,numToShow)},500);
 }
 
 function DefineRandomNumbers(numOfElems,level){
@@ -53,9 +53,9 @@ function ShowSingleNum(index,arr,max){
     setTimeout(() => {
          HideObjectById("number");
          if(index+1<=max)
-            setTimeout(()=>{ShowSingleNum(index+1,arr,max)},1000);
+            setTimeout(()=>{ShowSingleNum(index+1,arr,max)},500);
             else{
                 HideObjectById("showNum");
             }
-            },3000);
+    },5000);
 }
